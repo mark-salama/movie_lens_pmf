@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(gridExtra)
+library(tidyr)
+library(vcdExtra)
+library(dplyr) 
+library(knitr)
+library(viridis)
+library(purrr)
+library(pgmm)
+library(heatmaply)
+library(tibble)
+library(RColorBrewer)
+library(ggrepel)
+```
+
+```{r}
+theme_heat <- theme_classic(11) +
+    theme(axis.line = element_blank(),
+          axis.ticks = element_blank())
+```
+
+```{r}
+movie_dist2 <- read.csv("movie_dist.csv",head=TRUE,sep=",")
+```
+
+```{r}
+movie_dist
+```
+
+
+```{r}
+p <- ggplot(movie_dist2, aes(X, Y, label = Movie)) + geom_point() + ggtitle('20 Most Rated Movies Ploted in Two-Dimensions')
+
+p + geom_label_repel() + theme_light() + xlim(-2,15) + ylim(-5,12) + theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        plot.title = element_text(hjust = 0.5)
+        )
+```
+
